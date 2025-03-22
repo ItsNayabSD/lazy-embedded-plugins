@@ -8,4 +8,6 @@ mv ~/.config/nvim ~/.config/nvim.old # Backup your existing nvim configuration i
 git clone https://github.com/ItsNayabSD/nvpunk-embedded.git ~/.config/nvim # Clone nvpunk distribution
 git clone https://github.com/ItsNayabSD/lazy-embedded-plugins.git ~/.config/nvpunk # Add user plugins
 ```
-
+## Plugins
+- [robitx/gp.nvim](https://github.com/Robitx/gp.nvim)
+- [f-person/git-blame.nvim](https://github.com/f-person/git-blame.nvim)
