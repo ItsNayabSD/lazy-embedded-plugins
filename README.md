@@ -11,3 +11,4 @@ git clone https://github.com/ItsNayabSD/lazy-embedded-plugins.git ~/.config/nvpu
 ## Plugins
 - [robitx/gp.nvim](https://github.com/Robitx/gp.nvim)
 - [f-person/git-blame.nvim](https://github.com/f-person/git-blame.nvim)
+- [parrot.nvim/tree/main](https://github.com/frankroeder/parrot.nvim/tree/main)
