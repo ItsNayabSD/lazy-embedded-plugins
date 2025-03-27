@@ -349,4 +349,7 @@ return {
 			{ "<C-g>q", "<cmd>PrtAsk<cr>", mode = { "n" }, desc = "Ask a question" },
 		},
 	},
+	{
+		"lewis6991/fileline.nvim"
+	},
 }
