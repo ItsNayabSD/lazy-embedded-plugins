@@ -21,7 +21,7 @@ return {
         branch = "main", 
         lazy = false,
         opts = { auto_start = true, log_level = "info" },
-    }
+    },
     {
         "f-person/git-blame.nvim",
         -- load the plugin at startup
