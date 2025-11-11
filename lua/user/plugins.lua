@@ -14,7 +14,14 @@ return {
 
 			-- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
 		end,
-	},
+    },
+    -- Amp Plugin
+    {
+        "sourcegraph/amp.nvim",
+        branch = "main", 
+        lazy = false,
+        opts = { auto_start = true, log_level = "info" },
+    }
     {
         "f-person/git-blame.nvim",
         -- load the plugin at startup
