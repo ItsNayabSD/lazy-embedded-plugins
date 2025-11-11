@@ -33,23 +33,6 @@ return {
         },
 
     },
-	{
-		"f-person/git-blame.nvim",
-		-- load the plugin at startup
-		event = "VeryLazy",
-		-- Because of the keys part, you will be lazy loading this plugin.
-		-- The plugin wil only load once one of the keys is used.
-		-- If you want to load the plugin at startup, add something like event = "VeryLazy",
-		-- or lazy = false. One of both options will work.
-		opts = {
-			-- your configuration comes here
-			-- for example
-			enabled = true,  -- if you want to enable the plugin
-			message_template = "<<sha>> • <author> • <summary> • <date>", -- template for the blame message, check the Message template section for more options
-			date_format = "%m-%d-%Y %H:%M:%S", -- template for the date, check Date format section for more options
-			virtual_text_column = 1,  -- virtual text start column, check Start virtual text at column section for more options
-		},
-    },
     {
 		"frankroeder/parrot.nvim",
 		event = "VeryLazy",
@@ -58,16 +41,29 @@ return {
 		lazy = false,
 		config = function(_, opts)
 			-- add ollama if executable found
-			if vim.fn.executable "ollama" == 1 then
-				opts.providers["ollama"] = {}
-			end
 			require("parrot").setup(opts)
 		end,
 		opts = {
-			providers = {
-				openai = {
-					api_key = os.getenv "OPENAI_API_KEY",
-				},
+            providers = {
+                openai = {
+                    name = "openai",
+                    api_key = os.getenv "OPENAI_API_KEY",
+                    endpoint = "https://api.openai.com/v1/chat/completions",
+                    params = {
+                        chat = { temperature = 1.1, top_p = 1 },
+                        command = { temperature = 1.1, top_p = 1 },
+                    },
+                    topic = {
+                        model = "gpt-5",
+                        params = { max_completion_tokens = 64 },
+                    },
+                    models ={
+                        "gpt-5",
+                        "gpt-4o",
+                        "o4-mini",
+                        "gpt-4.1-nano",
+                    }
+                },
 --				anthropic = {
 --					api_key = os.getenv "ANTHROPIC_API_KEY",
 --					params = {
@@ -81,12 +77,12 @@ return {
 --						command = { max_tokens = 4096 },
 --					},
 --				},
-				gemini = {
-					api_key = os.getenv "GEMINI_API_KEY",
-				},
-				github = {
-					api_key = os.getenv "GITHUB_TOKEN",
-				},
+--				gemini = {
+--					api_key = os.getenv "GEMINI_API_KEY",
+--				},
+--				github = {
+--					api_key = os.getenv "GITHUB_TOKEN",
+--				},
 --				xai = {
 --					api_key = os.getenv "XAI_API_KEY",
 --				},
