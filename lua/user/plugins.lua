@@ -3,6 +3,40 @@
 
 
 return {
+    {
+        "nekowasabi/aider.vim",
+        enabled = false,
+        dependencies = "vim-denops/denops.vim",
+        config = function()
+            vim.g.aider_command = 'aider --no-auto-commits --no-gitignore --model ollama_chat/gpt-oss:20b'
+            -- vim.g.aider_command = 'aider --no-auto-commits --no-gitignore --model openrouter/qwen/qwen3-coder:free'
+            -- Where to show Aider
+            -- 'floating': inside Neovim. 'vsplit'/'split': if inside tmux, use a tmux pane
+            vim.g.aider_buffer_open_type = 'floating'
+            vim.g.aider_floatwin_width = 100
+            vim.g.aider_floatwin_height = 20
+
+            vim.api.nvim_create_autocmd('User',
+            {
+                pattern = 'AiderOpen',
+                callback =
+                function(args)
+                    vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { buffer = args.buf })
+                    vim.keymap.set('n', '<Esc>', '<cmd>AiderHide<CR>', { buffer = args.buf })
+                end
+            })
+            vim.api.nvim_set_keymap('n', '<leader>at', ':AiderRun<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>aa', ':AiderAddCurrentFile<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>ar', ':AiderAddCurrentFileReadOnly<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>aw', ':AiderAddWeb<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>ax', ':AiderExit<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>ai', ':AiderAddIgnoreCurrentFile<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>aI', ':AiderOpenIgnore<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>ap', ':AiderPaste<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>ah', ':AiderHide<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('v', '<leader>av', ':AiderVisualTextWithPrompt<CR>', { noremap = true, silent = true })
+        end
+    },
 	{
 		"robitx/gp.nvim",
 		-- { "robitx/gp.nvim", enabled = false },
