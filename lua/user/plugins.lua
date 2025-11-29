@@ -4,11 +4,97 @@
 
 return {
     {
+        "GeorgesAlkhouri/nvim-aider",
+        cmd = "Aider",
+        -- Example key mappings for common actions:
+        keys = {
+            { "<leader>a/", "<cmd>Aider toggle<cr>", desc = "Toggle Aider" },
+            { "<leader>as", "<cmd>Aider send<cr>", desc = "Send to Aider", mode = { "n", "v" } },
+            { "<leader>ac", "<cmd>Aider command<cr>", desc = "Aider Commands" },
+            { "<leader>ab", "<cmd>Aider buffer<cr>", desc = "Send Buffer" },
+            { "<leader>a+", "<cmd>Aider add<cr>", desc = "Add File" },
+            { "<leader>a-", "<cmd>Aider drop<cr>", desc = "Drop File" },
+            { "<leader>ar", "<cmd>Aider add readonly<cr>", desc = "Add Read-Only" },
+            { "<leader>aR", "<cmd>Aider reset<cr>", desc = "Reset Session" },
+            -- Example nvim-tree.lua integration if needed
+            { "<leader>a+", "<cmd>AiderTreeAddFile<cr>", desc = "Add File from Tree to Aider", ft = "NvimTree" },
+            { "<leader>a-", "<cmd>AiderTreeDropFile<cr>", desc = "Drop File from Tree from Aider", ft = "NvimTree" },
+        },
+        dependencies = {
+            { "folke/snacks.nvim", version = ">=2.24.0" },
+            --- The below dependencies are optional
+            "catppuccin/nvim",
+            "nvim-tree/nvim-tree.lua",
+            --- Neo-tree integration
+            {
+                "nvim-neo-tree/neo-tree.nvim",
+                opts = function(_, opts)
+                    -- Example mapping configuration (already set by default)
+                    -- opts.window = {
+                        --   mappings = {
+                            --     ["+"] = { "nvim_aider_add", desc = "add to aider" },
+                            --     ["-"] = { "nvim_aider_drop", desc = "drop from aider" }
+                            --     ["="] = { "nvim_aider_add_read_only", desc = "add read-only to aider" }
+                            --   }
+                            -- }
+                            require("nvim_aider.neo_tree").setup(opts)
+                        end,
+                },
+            },
+            config = function()
+            require("nvim_aider").setup({
+                aider_cmd = "aider --model ollama_chat/deepseek-r1:1.5b",
+                args = {
+                    "--no-gitignore",
+                    "--no-auto-commits",
+                    "--pretty",
+                    "--stream",
+                },
+                auto_reload = false,
+                idle_timeout = 5000,
+                response_timeout = 30000,
+                quick_idle_timeout = 500,
+                quick_commands = {
+                    "/add",
+                    "/drop",
+                    "/read-only",
+                    "/ls",
+                    "/clear",
+                    "/reset",
+                    "/undo",
+                },
+                notifications = true,
+                theme = {
+                    user_input_color = "#a6da95",
+                    tool_output_color = "#8aadf4",
+                    tool_error_color = "#ed8796",
+                    tool_warning_color = "#eed49f",
+                    assistant_output_color = "#c6a0f6",
+                    completion_menu_color = "#cad3f5",
+                    completion_menu_bg_color = "#24273a",
+                    completion_menu_current_color = "#181926",
+                    completion_menu_current_bg_color = "#f4dbd6",
+                },
+                picker_cfg = {
+                    preset = "vscode",
+                },
+                config = {
+                    os = { editPreset = "nvim-remote" },
+                    gui = { nerdFontsVersion = "3" },
+                },
+                win = {
+                    wo = { winbar = "Aider" },
+                    style = "nvim_aider",
+                    position = "right",
+                },
+            })
+        end,
+    },
+    {
         "nekowasabi/aider.vim",
-        enabled = false,
         dependencies = "vim-denops/denops.vim",
         config = function()
-            vim.g.aider_command = 'aider --no-auto-commits --no-gitignore --model ollama_chat/gpt-oss:20b'
+            vim.g.aider_command = 'aider --no-auto-commits --no-gitignore --model ollama_chat/deepseek-r1:1.5b'
             -- vim.g.aider_command = 'aider --no-auto-commits --no-gitignore --model openrouter/qwen/qwen3-coder:free'
             -- Where to show Aider
             -- 'floating': inside Neovim. 'vsplit'/'split': if inside tmux, use a tmux pane
