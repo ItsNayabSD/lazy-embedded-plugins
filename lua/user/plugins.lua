@@ -50,7 +50,7 @@ return {
             -- this file can contain specific instructions for your project
             instructions_file = "avante.md",
             -- for example
-            provider = "goose",
+            provider = "claude-code",
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -88,35 +88,6 @@ return {
                     file_types = { "markdown", "Avante" },
                 },
                 ft = { "markdown", "Avante" },
-            },
-        },
-        acp_providers = {
-            ["gemini-cli"] = {
-                command = "gemini",
-                args = { "--experimental-acp" },
-                env = {
-                    NODE_NO_WARNINGS = "1",
-                    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
-                },
-            },
-            ["claude-code"] = {
-                command = "npx",
-                args = { "@zed-industries/claude-code-acp" },
-                env = {
-                    NODE_NO_WARNINGS = "1",
-                    ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
-                },
-            },
-            ["goose"] = {
-                command = "goose",
-                args = { "acp" },
-            },
-            ["codex"] = {
-                command = "codex-acp",
-                env = {
-                    NODE_NO_WARNINGS = "1",
-                    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY"),
-                },
             },
         },
     },
@@ -284,6 +255,7 @@ return {
     {
 		"frankroeder/parrot.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim" },
 		dev = vim.fn.has "macunix" == 1 and vim.fn.expand "$USER" == "frankroeder",
 		lazy = false,
