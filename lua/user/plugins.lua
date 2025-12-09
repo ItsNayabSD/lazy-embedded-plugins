@@ -4,6 +4,37 @@
 
 return {
     {
+        "olimorris/codecompanion.nvim",
+        enabled = false,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        opts = {
+            adapters = {
+                acp = {
+                    claude_code = function()
+                        return require("codecompanion.adapters").extend("claude_code", {
+                            env = {
+                                api_key = "CLAUDE_CODE_OAUTH_TOKEN",
+                            },
+                        })
+                    end,
+                },
+            },
+            strategies = {
+                chat = {
+                    adapter = "claude_code",
+                    model = "claude-haiku-4.5",
+                    -- model = "claude-sonnet-4.5",
+                },
+                inline = {
+                    adapter = "claude_code",
+                    model = "claude-haiku-4.5",
+                },
+            },
+        },
+    },
+    {
         "yetone/avante.nvim",
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         -- ⚠️ must add this setting! ! !
@@ -566,3 +597,5 @@ return {
 		"lewis6991/fileline.nvim"
 	},
 }
+
+
