@@ -1,0 +1,23 @@
+        opts = {
+            adapters = {
+                http = {
+                    claude_code = function()
+                        return require("codecompanion.adapters").extend("claude_code", {
+                            env = {
+                                api_key = "CLAUDE_CODE_OAUTH_TOKEN",
+                            },
+                        })
+                    end,
+                },
+            },
+            strategies = {
+                chat = {
+                    adapter = "claude_code",
+                    model = "claude-sonnet-4.5",
+                },
+                inline = {
+                    adapter = "claude_code",
+                    model = "claude-haiku-4.5",
+                },
+            },
+        },
