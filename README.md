@@ -1,6 +1,6 @@
 # lazy-embedded-plugins
 
-Supplementary plugins for lazy.nvim, tailored for the [nvpunk-embedded](https://github.com/ItsNayabSD/nvpunk-embedded) distribution.
+Additional user Neovim plugins to be used alongside [nvpunk-embedded](https://github.com/ItsNayabSD/nvpunk-embedded) distribution.
 
 ## Install
 ```shell
@@ -19,8 +19,6 @@ git clone https://github.com/ItsNayabSD/lazy-embedded-plugins.git ~/.config/nvpu
 - [frankroeder/parrot.nvim](https://github.com/frankroeder/parrot.nvim) - Multi-provider AI assistant (OpenAI, Anthropic, Gemini, etc.) (disabled)
 - [robitx/gp.nvim](https://github.com/Robitx/gp.nvim) - GPT integration (disabled)
 - [sourcegraph/amp.nvim](https://github.com/sourcegraph/amp.nvim) - Sourcegraph Amp AI assistant (disabled)
-
-### Aider Integrations
 - [GeorgesAlkhouri/nvim-aider](https://github.com/GeorgesAlkhouri/nvim-aider) - Aider integration via Snacks (disabled)
 - [nekowasabi/aider.vim](https://github.com/nekowasabi/aider.vim) - Denops-based Aider integration (disabled)
 
