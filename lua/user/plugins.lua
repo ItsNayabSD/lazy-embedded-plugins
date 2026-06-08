@@ -50,7 +50,30 @@ return {
             -- this file can contain specific instructions for your project
             instructions_file = "avante.md",
             -- for example
-            provider = "claude-code",
+            provider = "claude-opus",
+            providers = {
+                ["claude-opus"] = {
+                    __inherited_from = "claude",
+                    endpoint = os.getenv("ANTHROPIC_BASE_URL"),
+                    api_key_name = "ANTHROPIC_API_KEY",
+                    model = "claude-opus-4-8",
+                    extra_request_body = {
+                        temperature = vim.NIL,
+                    },
+                },
+                ["claude-sonnet"] = {
+                    __inherited_from = "claude",
+                    endpoint = os.getenv("ANTHROPIC_BASE_URL"),
+                    api_key_name = "ANTHROPIC_API_KEY",
+                    model = "claude-sonnet-4-5",
+                },
+                ["claude-haiku"] = {
+                    __inherited_from = "claude",
+                    endpoint = os.getenv("ANTHROPIC_BASE_URL"),
+                    api_key_name = "ANTHROPIC_API_KEY",
+                    model = "claude-haiku-4-5",
+                },
+            },
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
